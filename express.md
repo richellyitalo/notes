@@ -1,11 +1,10 @@
-# Arquivo estático
+# Static files
 
-Para acessar `/files/{nome_arquivo}` da pasta `/tmp/uploads/{nome_arquivo}`
+To access `/files/{nome_arquivo}` from folder `/tmp/uploads/{nome_arquivo}`
 
 **https://expressjs.com/pt-br/starter/static-files.html**
 
-Exemplo
-
+Example
 ```js
 server.use(
   '/files/',
@@ -13,11 +12,11 @@ server.use(
 );
 ```
 
-# Retorno de dados relacionados (com Sequelize)
+# Returning related data (with Sequelize)
 
 **https://sequelize.org/master/manual/querying.html#attributes**
 
-Exemplo
+Example
 ```js
 const providers = await User.findAll({
   where: { provider: true },
@@ -30,4 +29,47 @@ const providers = await User.findAll({
     }
   ]
 });
+```
+
+## Configuring Nodemailer with handlebars
+```js
+import nodemailer from 'nodemailer';
+import expresshbs from 'express-handlebars';
+import nodemailerhbs from 'nodemailer-express-handlebars';
+import { resolve } from 'path';
+import mailConfig from '../config/mail';
+
+class Mail {
+  constructor() {
+    const { host, port, secure, auth } = mailConfig;
+
+    this.transporter = nodemailer.createTransport({
+      host,
+      port,
+      secure,
+      auth: auth.user ? auth : null,
+    });
+    this.configureTransporter();
+  }
+
+  configureTransporter() {
+    const viewPath = resolve(__dirname, '..', 'views', 'emails');
+
+    this.transporter.use(
+      'compile',
+      nodemailerhbs({
+        viewEngine: expresshbs.create({
+          layoutsDir: resolve(viewPath, 'layouts'),
+          partialsDir: resolve(viewPath, 'partials'),
+          defaultLayout: 'default',
+          extname: '.hbs',
+        }),
+        viewPath,
+        extName: '.hbs',
+      })
+    );
+  }
+}
+
+export default new Mail();
 ```
