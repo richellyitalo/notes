@@ -1,4 +1,4 @@
-### Static files
+## Static files
 
 To access `/files/{nome_arquivo}` from folder `/tmp/uploads/{nome_arquivo}`
 
@@ -12,7 +12,7 @@ server.use(
 );
 ```
 
-### Returning related data (with Sequelize)
+## Returning related data (with Sequelize)
 
 **https://sequelize.org/master/manual/querying.html#attributes**
 
@@ -31,7 +31,7 @@ const providers = await User.findAll({
 });
 ```
 
-### Configuring Nodemailer with handlebars
+## Configuring Nodemailer with handlebars
 ```js
 import nodemailer from 'nodemailer';
 import expresshbs from 'express-handlebars';
