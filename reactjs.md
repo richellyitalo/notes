@@ -1,12 +1,12 @@
-- [Estilos](#estilos)
-  - [Estilos globais (styled-components)](#estilos-globais)
+- [Styles](#styles)
+  - [Global styles (styled-components)](#global-styles)
 
-# Estilos
-## Estilos globais
-Pré-requisitos:\
- - Instalar o pacote: `yarn add styled-components`\
+# Styles
+## Global styles
+Pre requisites:
+ - Install the lib: `yarn add styled-components`
 
-Arquivo **'styles/global.js'**
+File **'styles/global.js'**
 ```js
 import { createGlobalStyle } from 'styled-components';
 
@@ -25,7 +25,7 @@ export default createGlobalStyle`
 `;
 ```
 
-Arquivo **'App.js'**
+File **'App.js'**
 ```js
 // ..
 import GlobalStyle from './styles/global';
