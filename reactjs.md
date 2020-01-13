@@ -50,7 +50,7 @@ export default function App() {
 Pre requisites:
  - Install the lib: `yarn add customize-cra react-app-rewired babel-plugin-root-import eslint-import-resolver-babel-plugin-root-import -D`
 
-File **'config-override.js'** *(overriding configs react-app)*
+File **'config-overrides.js'** *(overriding configs react-app)*
 ```js
 const { addBabelPlugin, override } = require('customize-cra');
 
