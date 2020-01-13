@@ -6,3 +6,6 @@
 
 # Debug
 - [Reactotron](https://github.com/infinitered/reactotron)
+
+# Change imutable states
+- [Immer](https://github.com/immerjs/immer)

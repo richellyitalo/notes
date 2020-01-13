@@ -1,5 +1,7 @@
 - [Styles](#styles)
   - [Global styles (styled-components)](#global-styles)
+- [Dev dependencies](#dev-dependencies)
+  - [Root Import (Absolute path to imports)](#root-import-(absolute-path-to-imports))
 
 # Styles
 ## Global styles
@@ -40,5 +42,66 @@ export default function App() {
       <GlobalStyle />
     </BrowserRouter>
   );
+}
+```
+
+# Dev dependencies
+## Root Import (Absolute path to imports)
+Pre requisites:
+ - Install the lib: `yarn add customize-cra react-app-rewired babel-plugin-root-import eslint-import-resolver-babel-plugin-root-import -D`
+
+File **'config-override.js'** *(overriding configs react-app)*
+```js
+const { addBabelPlugin, override } = require('customize-cra');
+
+module.exports = override(
+  addBabelPlugin([
+    'babel-plugin-root-import',
+    {
+      rootPathSuffix: 'src',
+    },
+  ])
+);
+```
+
+File **'package.json'** *(changing start, buld and test app scripts)*
+```json
+{
+  "name": "app",
+  // ... 
+  "scripts": {
+    "start": "react-app-rewired start", // replace 'react-scripts' to 'react-app-rewired'
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
+    "eject": "react-scripts eject"
+  },
+  // ...
+}
+```
+
+File **'.eslintrc'** *(to eslint dont appear errors)*
+```js
+module.exports = {
+  // ...
+  settings: {
+    'import/resolver': {
+      'babel-plugin-root-import': {
+        rootPathSuffix: 'src',
+      },
+    },
+  },
+};
+
+```
+
+File **'jsconfig.json'** *(to vscode recognize)*
+```json
+{
+  "compilerOptions": {
+    "baseUrl": "src",
+    "paths": {
+      "~/*": ["*"]
+    }
+  }
 }
 ```
