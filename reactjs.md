@@ -1,7 +1,7 @@
 - [Styles](#styles)
   - [Global styles (styled-components)](#global-styles)
 - [Dev dependencies](#dev-dependencies)
-  - [Root Import (Absolute path to imports)](#root-import-(absolute-path-to-imports))
+  - [Root Import (Absolute path to imports)](#root-import-absolute-path-to-imports)
 - [Store](#store)
   - [Redux + Saga + Reactotron (DEBUG)](#redux--saga--reactotron-debug)
 
