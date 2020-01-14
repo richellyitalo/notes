@@ -105,3 +105,123 @@ File **'jsconfig.json'** *(to vscode recognize)*
   }
 }
 ```
+# Store
+## Redux + Saga + Reactotron (DEBUG)
+Pre requisites: 
+  - `yarn add redux react-redux redux-saga reactotron-redux reactotron-redux-saga immer`
+
+File **'store/modules/auth/reducer.js'**
+```js
+const INITIAL_STATE = {};
+export default function auth(state = INITIAL_STATE, action) {
+  switch (action.type) {
+    default:
+      return state;
+  }
+}
+```
+
+File **'store/modules/auth/actions.js'**
+```js
+// action functions
+```
+
+File **'store/modules/auth/sagas.js'**
+```js
+import { all } from 'redux-saga/effects';
+
+export default all([])
+```
+
+File **'store/modules/rootReducer.js'**
+```js
+import { combineReducers } from 'redux';
+import auth from './auth/reducer';
+
+export default combinReducers({ auth });
+```
+
+File **'store/modules/rootSaga.js'**
+```js
+import { all } from 'redux-saga/effects';
+import auth from './auth/reducers.js';
+
+export default function* rootSaga() {
+  return yield all([auth]);
+}
+```
+
+File **'config/ReatotronConfig.js'**
+```js
+import Reactotron from 'reactotron-react-js';
+import { reactotronRedux } from 'reactotron-redux';
+import reactotronSagaPlugin from 'reactotron-redux-saga';
+
+if (process.env.NODE_ENV === 'development') {
+  const tron = Reactotron
+    .configure()
+    .use(reactotronRedux())
+    .use(reactotronSagaPlugin())
+    .connect();
+
+    tron.clear();
+
+    // hack tron in console :D
+    console.tron = tron;
+}
+```
+
+File **'store/createStore.js'**
+```js
+import { createStore, compose } from 'redux';
+
+export default (reducers, middlewares) => {
+  const enhancer = process.env.NODE_ENV === 'development'
+    ? compose(console.tron.createEnhancer(), applyMiddleware(...middlewares))
+    : applyMiddleware(...middlewares);
+
+  return createStore(reducers, enhancer);
+}
+```
+
+File **'store/index.js'**
+```js
+import createStore from './createStore';
+import createSagaMiddleware from 'redux-saga';
+
+import rootReducer from './modules/rootReducer';
+import rootSaga from './modules/rootSaga';
+
+const sagaMonitor = process.env.NODE_ENV === 'develpment'
+  ? console.log.createSagaMonitor()
+  : null;
+
+const sagaMiddleware = createSagaMiddleware({ sagaMonitor });
+
+const middlewares = [sagaMiddleware];
+
+const store = createStore(rootReducer, middlewares);
+
+sagaMiddleware.run(rootSaga);
+```
+
+File **'App.js'**
+```js
+import { Provider } from 'react-redux';
+
+import './config/ReactotronConfig'; // before Store
+
+import store from './store'; // after ReactotronConfig
+
+// ...
+
+function App() {
+  return (
+    <Provider store={store}>
+      {/*components app*/}
+    </Provider>
+  )
+}
+
+// ...
+```
