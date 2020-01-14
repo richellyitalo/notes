@@ -3,7 +3,7 @@
 - [Dev dependencies](#dev-dependencies)
   - [Root Import (Absolute path to imports)](#root-import-(absolute-path-to-imports))
 - [Store](#store)
-  - [Redux + Saga + Reactotron (DEBUG)](#redux-+-saga-+-reactotron-(debug))
+  - [Redux + Saga + Reactotron (DEBUG)](#redux--saga--reactotron-debug)
 
 # Styles
 ## Global styles
