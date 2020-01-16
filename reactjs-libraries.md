@@ -12,3 +12,6 @@
 
 # Form
 - [Unform](https://github.com/Rocketseat/unform)
+
+# Storage state
+- [Redux Persist](https://github.com/rt2zz/redux-persist)

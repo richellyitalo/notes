@@ -146,7 +146,7 @@ export default combinReducers({ auth });
 File **'store/modules/rootSaga.js'**
 ```js
 import { all } from 'redux-saga/effects';
-import auth from './auth/reducers.js';
+import auth from './auth/sagas.js';
 
 export default function* rootSaga() {
   return yield all([auth]);
