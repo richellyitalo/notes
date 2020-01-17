@@ -4,6 +4,9 @@
 # Icons
 - [React Icons](https://github.com/react-icons/react-icons)
 
+# Notifications
+- [React Tostify](-https://github.com/fkhadra/react-toastify)
+
 # Debug
 - [Reactotron](https://github.com/infinitered/reactotron)
 
